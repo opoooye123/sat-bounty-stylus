@@ -1,40 +1,39 @@
 "use client"
 
-```tsx file="app/create/page.tsx"
-"use client"
+import type React from "react"
 
-import { useState } from 'react'
-import { useRouter } from 'next/navigation'
+import { useState } from "react"
+import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
-import { useCampaigns } from '@/lib/CampaignContext'
-import { ArrowLeft } from 'lucide-react'
-import Link from 'next/link'
+import { useCampaigns } from "@/lib/CampaignContext"
+import { ArrowLeft } from "lucide-react"
+import Link from "next/link"
 
 export default function CreateCampaign() {
   const router = useRouter()
   const { addCampaign } = useCampaigns()
-  const [title, setTitle] = useState('')
-  const [description, setDescription] = useState('')
-  const [goal, setGoal] = useState('')
-  const [daysLeft, setDaysLeft] = useState('')
+  const [title, setTitle] = useState("")
+  const [description, setDescription] = useState("")
+  const [goal, setGoal] = useState("")
+  const [daysLeft, setDaysLeft] = useState("")
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     if (!title || !description || !goal || !daysLeft) {
-      alert('Please fill in all fields')
+      alert("Please fill in all fields")
       return
     }
     addCampaign({
       title,
       description,
-      goal: parseFloat(goal),
-      daysLeft: parseInt(daysLeft),
-      creator: 'Anonymous' // In a real app, this would be the logged-in user
+      goal: Number.parseFloat(goal),
+      daysLeft: Number.parseInt(daysLeft),
+      creator: "Anonymous", // In a real app, this would be the logged-in user
     })
-    router.push('/')
+    router.push("/")
   }
 
   return (
@@ -49,7 +48,9 @@ export default function CreateCampaign() {
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <label htmlFor="title" className="block text-sm font-medium text-gray-700">Title</label>
+              <label htmlFor="title" className="block text-sm font-medium text-gray-700">
+                Title
+              </label>
               <Input
                 id="title"
                 value={title}
@@ -59,7 +60,9 @@ export default function CreateCampaign() {
               />
             </div>
             <div>
-              <label htmlFor="description" className="block text-sm font-medium text-gray-700">Description</label>
+              <label htmlFor="description" className="block text-sm font-medium text-gray-700">
+                Description
+              </label>
               <Textarea
                 id="description"
                 value={description}
@@ -69,7 +72,9 @@ export default function CreateCampaign() {
               />
             </div>
             <div>
-              <label htmlFor="goal" className="block text-sm font-medium text-gray-700">Funding Goal ($)</label>
+              <label htmlFor="goal" className="block text-sm font-medium text-gray-700">
+                Funding Goal ($)
+              </label>
               <Input
                 id="goal"
                 type="number"
@@ -80,7 +85,9 @@ export default function CreateCampaign() {
               />
             </div>
             <div>
-              <label htmlFor="daysLeft" className="block text-sm font-medium text-gray-700">Campaign Duration (days)</label>
+              <label htmlFor="daysLeft" className="block text-sm font-medium text-gray-700">
+                Campaign Duration (days)
+              </label>
               <Input
                 id="daysLeft"
                 type="number"
@@ -93,7 +100,9 @@ export default function CreateCampaign() {
           </form>
         </CardContent>
         <CardFooter>
-          <Button onClick={handleSubmit} className="w-full bg-primary hover:bg-primary/90">Create Campaign</Button>
+          <Button onClick={handleSubmit} className="w-full bg-primary hover:bg-primary/90">
+            Create Campaign
+          </Button>
         </CardFooter>
       </Card>
     </div>
