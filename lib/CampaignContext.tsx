@@ -2,7 +2,8 @@
 
 import type React from "react"
 import { createContext, useContext, useState } from "react"
-import { ethers } from "ethers"
+import { ethers } from "ethers";
+import { ExternalProvider } from "@ethersproject/providers"
 
 type Campaign = {
   id: number
@@ -22,6 +23,13 @@ type CampaignContextType = {
   connectWallet: () => Promise<string | null>
 }
 
+
+declare global {
+  interface Window {
+    crypto?: Crypto
+    ethereum?: ExternalProvider;
+  }
+}
 const CampaignContext = createContext<CampaignContextType | undefined>(undefined)
 
 export const useCampaigns = () => {
@@ -82,6 +90,7 @@ export const CampaignProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     }
 
     try {
+      //@ts-expect-error - window.ethereum is defined
       await window.ethereum.request({ method: "eth_requestAccounts" })
       const provider = new ethers.providers.Web3Provider(window.ethereum)
       const signer = provider.getSigner()
