@@ -88,7 +88,7 @@ export default function CampaignPage() {
             <Progress value={(campaign.raised / campaign.goal) * 100} className="h-2" />
           </div>
           <p className="text-lg font-semibold mb-2">
-            ${campaign.raised.toLocaleString()} raised of ${campaign.goal.toLocaleString()}
+            {campaign.raised.toLocaleString()} ETH raised of {campaign.goal.toLocaleString()} ETH
           </p>
           <p className="text-sm text-gray-500 mb-4">{campaign.daysLeft} days left</p>
           <p className="text-sm text-gray-500 mb-4">Created by: {campaign.creator}</p>
