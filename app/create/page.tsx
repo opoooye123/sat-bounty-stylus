@@ -31,7 +31,7 @@ export default function CreateCampaign() {
       description,
       goal: Number.parseFloat(goal),
       daysLeft: Number.parseInt(daysLeft),
-      creator: "Anonymous", // In a real app, this would be the logged-in user
+      creator: "Anonymous",
     })
     router.push("/")
   }
@@ -73,7 +73,7 @@ export default function CreateCampaign() {
             </div>
             <div>
               <label htmlFor="goal" className="block text-sm font-medium text-gray-700">
-                Funding Goal ($)
+                Funding Goal (ETH)
               </label>
               <Input
                 id="goal"
