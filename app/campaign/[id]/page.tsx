@@ -55,17 +55,10 @@ export default function CampaignPage() {
       const provider = new ethers.providers.Web3Provider(window.ethereum)
       const signer = provider.getSigner()
 
-      const { chainId } = await provider.getNetwork()
-      const ARBITRUM_SEPOLIA_CHAIN_ID = 421613
-
-      if (chainId !== ARBITRUM_SEPOLIA_CHAIN_ID) {
-        alert("Please switch to the Arbitrum Sepolia network.")
-        return
-      }
-
       const tx = await signer.sendTransaction({
         to: CrowdFunding,
         value: ethers.utils.parseEther(amount),
+        gasLimit: 21000,
       })
       await tx.wait()
 
@@ -119,11 +112,10 @@ export default function CampaignPage() {
         </CardContent>
         <CardFooter>
           <p className="text-sm text-gray-500">
-            Built with Arbitrum stylus.
+            Built with Arbitrum Stylus
           </p>
         </CardFooter>
       </Card>
     </div>
   )
 }
-
