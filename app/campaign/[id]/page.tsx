@@ -67,8 +67,7 @@ export default function CampaignPage() {
       alert(`Thank you for your donation of ${amount} ETH!`)
     } catch (error) {
       console.error("Transaction failed:", error)
-      //@ts-ignore
-      alert(`Transaction failed: ${error.message}`)
+      alert(`Transaction failed: ${error}`)
     } finally {
       setIsLoading(false)
     }
