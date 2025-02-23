@@ -9,8 +9,9 @@ import { Input } from "@/components/ui/input"
 import { useCampaigns } from "@/lib/CampaignContext"
 import { ArrowLeft } from "lucide-react"
 import Link from "next/link"
-import { ethers } from "ethers"
-import { ExternalProvider } from "@ethersproject/providers"
+import { ethers} from "ethers"
+import { ExternalProvider } from "@ethersproject/providers";
+import { CrowdFunding } from "@/utils/address";
 
 
 declare global {
@@ -54,10 +55,8 @@ export default function CampaignPage() {
       const provider = new ethers.providers.Web3Provider(window.ethereum)
       const signer = provider.getSigner()
 
-      // This is where you would typically interact with your smart contract
-      // For this example, we'll just simulate a transaction
       const tx = await signer.sendTransaction({
-        to: ethers.constants.AddressZero, // Replace with your contract address
+        to: CrowdFunding,
         value: ethers.utils.parseEther(amount),
       })
 
