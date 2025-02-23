@@ -55,11 +55,18 @@ export default function CampaignPage() {
       const provider = new ethers.providers.Web3Provider(window.ethereum)
       const signer = provider.getSigner()
 
+      const { chainId } = await provider.getNetwork()
+      const ARBITRUM_SEPOLIA_CHAIN_ID = 421613
+
+      if (chainId !== ARBITRUM_SEPOLIA_CHAIN_ID) {
+        alert("Please switch to the Arbitrum Sepolia network.")
+        return
+      }
+
       const tx = await signer.sendTransaction({
         to: CrowdFunding,
         value: ethers.utils.parseEther(amount),
       })
-
       await tx.wait()
 
       updateCampaign(campaign.id, donationAmount)
@@ -67,7 +74,8 @@ export default function CampaignPage() {
       alert(`Thank you for your donation of ${amount} ETH!`)
     } catch (error) {
       console.error("Transaction failed:", error)
-      alert(`Transaction failed: ${error instanceof Error ? error.message : "Unknown error"}`)
+      //@ts-ignore
+      alert(`Transaction failed: ${error.message}`)
     } finally {
       setIsLoading(false)
     }
@@ -111,7 +119,7 @@ export default function CampaignPage() {
         </CardContent>
         <CardFooter>
           <p className="text-sm text-gray-500">
-            All donations are processed securely through MetaMask on the Arbitrum network.
+            Built with Arbitrum stylus.
           </p>
         </CardFooter>
       </Card>
