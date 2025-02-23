@@ -61,7 +61,7 @@ export default function Home() {
                   <Progress value={(campaign.raised / campaign.goal) * 100} className="h-2" />
                 </div>
                 <p className="text-lg font-semibold mb-2">
-                  ${campaign.raised.toLocaleString()} raised of ${campaign.goal.toLocaleString()}
+                  {campaign.raised.toLocaleString()} ETH raised of {campaign.goal.toLocaleString()} ETH
                 </p>
                 <p className="text-sm text-gray-500 mb-4">{campaign.daysLeft} days left</p>
                 <div className="relative h-24 bg-gray-100 rounded-lg overflow-hidden mb-4">
