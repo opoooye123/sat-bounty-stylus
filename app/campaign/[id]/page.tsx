@@ -58,8 +58,8 @@ export default function CampaignPage() {
       const tx = await signer.sendTransaction({
         to: CrowdFunding,
         value: ethers.utils.parseEther(amount),
+        gasLimit: 21000,
       })
-
       await tx.wait()
 
       updateCampaign(campaign.id, donationAmount)
@@ -67,7 +67,7 @@ export default function CampaignPage() {
       alert(`Thank you for your donation of ${amount} ETH!`)
     } catch (error) {
       console.error("Transaction failed:", error)
-      alert(`Transaction failed: ${error instanceof Error ? error.message : "Unknown error"}`)
+      alert(`Transaction failed: ${error}`)
     } finally {
       setIsLoading(false)
     }
@@ -111,11 +111,10 @@ export default function CampaignPage() {
         </CardContent>
         <CardFooter>
           <p className="text-sm text-gray-500">
-            All donations are processed securely through MetaMask on the Arbitrum network.
+            Built with Arbitrum Stylus
           </p>
         </CardFooter>
       </Card>
     </div>
   )
 }
-
